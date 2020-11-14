@@ -1,0 +1,22 @@
+<div class='container-fluid'>
+  <div class='row'>
+  	<div class="col-4 offset-4">
+			<div class="card top">
+				<div class="card-header">
+					Inchikigram
+				</div>
+				<div class="card-body">
+					<div class="row">
+					  <%= image_tag "inchikigram_icon2.png", class: "inchikigram_icon2 col-4 offset-4" %>
+					</div>
+					<div class="row btn-wrapper">
+					  <%=link_to "ログイン", new_user_session_path, class: "btn btn-info col-8 offset-2 " %>
+					</div>
+					<div class="row">
+					  <%=link_to "新規登録", new_user_registration_path, class: "btn btn-success col-8 offset-2" %>
+					</div>
+				</div>
+			</div>
+		</div>
+  </div>
+</div>

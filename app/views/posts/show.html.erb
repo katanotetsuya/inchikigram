@@ -1,2 +1,56 @@
-<h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
+<!-- container-fluid → 可変幅のコンテナ(ウィンドウサイズを変えても常に画面いっぱいに広がる -->
+<div class='container-fluid'>
+  <div class='row'>
+
+　　<!-- サイドメニュー -->
+  	<div class='col-3'>
+      <%= render 'posts/sidemenu' %>
+  	</div>
+　  <!-- 投稿ボタン -->
+    <%= render 'posts/modal', posts:Post.new %>
+
+    <div class='col-6 post-show-main'>
+		  <div class="card">
+		    <div class="card-header">
+		    	<%= attachment_image_tag @post.user, :profile_image, :fill, 50, 50, fallback: "no-image.jpg", size: "50x50", class: "rounded-circle" %>
+		    	<%= @post.user.name %>
+		    	<%= link_to user_path(@post.user.id), class: "user-show-icon" do %>
+		    	  <i class="fa fa-ellipsis-h fa-lg"></i>
+		    	<% end %>
+		    </div>
+		    <%= attachment_image_tag @post, :image %>
+		    <div class="card-body">
+		    	<%= render partial: 'posts/posts', locals: { post: @post }  %>
+		    </div>
+		    <div class="card-text">
+		    	<%= @post.post_comment %>
+		    </div>
+		    <div class="card-footer" style="padding: 0px">
+		    	<%= render partial: 'comments/form', locals: { comment: @comment, post: @post } %>
+			    <table>
+			    	<tbody>
+						  <% @comments.each do |comment| %>
+				    		<tr>
+				    			<td>
+				    				<%= attachment_image_tag comment.user, :profile_image, :fill, 40, 40, fallback: "no-image.jpg", size: "40x40", class: "rounded-circle" %>
+				    			</td>
+				    			<td class="name">
+				    				<%= comment.user.name %>
+				    			</td>
+				    		</tr>
+				    		<tr>
+				    			<td></td>
+				    			<td></td>
+				    			<td class="comment">
+				    				<%= comment.content %>
+				    			</td>
+				    		</tr>
+					  	<% end %>
+		    		</tbody>
+		    	</table>
+		    </div>
+		  </div>
+    </div>
+
+  </div>
+</div>

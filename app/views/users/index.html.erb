@@ -1,31 +1,47 @@
+<!-- container-fluid → 可変幅のコンテナ(ウィンドウサイズを変えても常に画面いっぱいに広がる -->
 <div class='container-fluid'>
   <div class='row'>
 
+　　<!-- サブメニュー -->
   	<div class='col-3'>
-  	  <ul class='side-menu'>
-  	  	<li>1</li>
-  	  	<li><%=link_to "ホーム", posts_path, class: "nav-link" %></li>
-  	  	<li>プロフィール</li>
-  	  	<li><%=link_to "User(一覧)", users_path, class: "nav-link" %></li>
-  	  	<li><%= link_to "ログアウト", destroy_user_session_path, class: "nav-link", :method=>:delete %></li>
-  	  	<li>投稿</li>
-  	  </ul>
+      <%= render 'posts/sidemenu' %>
   	</div>
+　  <!-- 投稿ボタン -->
+    <%= render 'posts/modal', post:Post.new %>
 
-  	<div class='col-6 main'>
-  	  <h2>User(一覧)</h2>
+　　<!-- メイン画面 -->
+  	<div class='col-5 users-main'>
+  	  <div class='row p-2'>
+        <div class='col-12 text-center'>
+          <h2>ユーザー(一覧)</h2>
+        </div>
+      </div>
   	  <table class="table">
   	  	<tbody>
   	  	  <% @users.each do |user| %>
   	  	  <tr>
-  	  	  	<td><%= attachment_image_tag user, :profile_image %></td>
+  	  	  	<td>
+              <%= attachment_image_tag user, :profile_image, :fill, 50, 50, fallback: "no-image.jpg", size: "50x50", class: "rounded-circle" %>
+              </td>
   	  	  	<td><%= user.name %></td>
-  	  	  	<td></td>
-  	  	  	<td></td>
+  	  	  	<td>
+              <div id="follow_form_<%= user.id %>">
+              　<%= render "follow_form", user:user %>
+              </div>
+            </td>
+  	  	  	<td>
+            　<% if current_user != user.id %>
+  　　　　　　　  <%= link_to chat_path(user.id) do %>
+                  <i class="far fa-comment"></i>
+                <% end %>
+　　　　　　　　<% end %>
+            </td>
   	  	  </tr>
   	  	  <% end %>
   	  	</tbody>
   	  </table>
-  	</div>
+    </div>
+
   </div>
 </div>
+

@@ -13,16 +13,246 @@
  */
 @import "bootstrap";
 
+body {
+  background-color: rgba(0, 0, 0, 0.01);;
+}
 
-.side-menu {
-    list-style: none;
+/* トップ画面 */
+.card.top {
+  margin-top: 150px;
 
+  .card-header {
+    color: white;
+    font-family: 'Sacramento', cursive;
+    font-size: 45px;
+    text-align: center;
+    background: linear-gradient(45deg, rgba(254,212,117,1) 0%,rgba(229,61,93,1) 50%,rgba(194,49,134,1) 70%,rgba(156,56,187,1) 100%);
+  }
+
+  .card-body {
+    .row {
+      padding-top: 15px;
+
+      .inchikigram_icon2 {
+        padding-top: 20px
+      }
+    }
+    .row.btn-wrapper {
+      padding-top: 80px;
+    }
+  }
+}
+
+
+/* ログイン画面 */
+.card.sign-in {
+  margin-top: 150px;
+
+  .card-header {
+    font-size: 30px;
+    text-align: center;
+  }
+  .card-body{
+
+    .row {
+      padding-top: 15px;
+    }
+    .login-botton {
+      width: 125px;
+    }
+  }
+}
+
+
+/* 新規登録 */
+.card.sign-up {
+  margin-top: 150px;
+
+  .card-header {
+    font-size: 30px;
+    text-align: center;
+  }
+  .card-body{
+
+    .row {
+      padding-top: 15px;
+    }
+    .sign-up-botton {
+      width: 125px;
+    }
+  }
+}
+
+
+/* サイドメニュー */
+.side-menu_fixed {
+  list-style: none;
+  position: sticky;
+  top: 60px;
 
 	li {
 		margin-top: 50px;
 		font-size: 35px;
 	}
 }
-.main {
-	background-color: antiquewhite
+.inchikigram_icon {
+  width: 45px;
+  height: 45px;
+  margin-left: 15px;
+}
+.post-botton {
+  width: 200px;
+  margin-left: 30px;
+
+  span {
+    margin-left: 38px;
+  }
+}
+.nav-link {
+  color: black;
+}
+
+
+/* ホーム画面 */
+.post-index-main{
+  .card {
+    margin: 50px 50px;
+  }
+
+  .card-header {
+    background-color: white;
+
+    .show-icon{
+      color: black;
+      float: right;
+      margin-top: 10px;
+    }
+  }
+
+  .card-body {
+  }
+
+  .card-text {
+    padding: 15px;
+  }
+
+  .card-footer {
+    background-color: white;
+  }
+}
+
+
+/* いいねボタン */
+.iine_button {
+  font-size: x-large;
+  color: black;
+}
+
+
+/* コメント */
+.comment-area {
+  width: 80%;
+  height: 36px;
+  border: none;
+}
+.comment-submit {
+  width: 20%;
+  height: 36px;
+  border: none;
+}
+
+
+/* 投稿詳細 */
+.post-show-main{
+  .card {
+    margin: 50px 50px;
+  }
+
+  .card-header {
+    background-color: white;
+
+    .user-show-icon {
+      color: black;
+      float: right;
+      margin-top: 10px;
+    }
+  }
+
+  .card-body {
+  }
+
+  .card-text {
+    padding: 15px;
+  }
+
+  .card-footer {
+    background-color: white;
+    .name {
+      padding-bottom: 15px;
+    }
+  }
+}
+
+
+/* プロフィール */
+.user-show-main {
+  .card {
+    margin: 50px 50px;
+
+    .card-header {
+      background-color: white;
+
+      .user-edit-icon {
+        color: black;
+        float: right;
+        margin-top: 10px;
+      }
+    }
+    .card-body {
+
+      .post-edit-icon {
+        float: right;
+        color: gray;
+        padding-right: 10px;
+      }
+      .post-delete-icon {
+        float: right;
+        color: red;
+      }
+    }
+    .card-text {
+      padding-top: 30px;
+    }
+  }
+}
+
+/* チャット */
+.card.chat {
+  margin-top: 30px;
+
+  .card-header {
+    font-size: 25px;
+  }
+
+  .card-body {
+     height: 600px;
+     overflow: scroll;
+     padding: 40px;
+
+     row {
+       margin-top: 20px;
+     }
+  }
+}
+
+.my-message {
+   padding: 5px;
+   background-color: rgb(29, 161, 242);
+   color: white;
+   border-radius: 10px;
+}
+.other-message {
+   padding: 5px;
+   background-color: rgba(0, 0, 0, 0.1);
+   border-radius: 10px;
 }

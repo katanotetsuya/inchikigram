@@ -1,0 +1,32 @@
+<ul class='side-menu_fixed'>
+  <li>
+    <%= link_to posts_path do %>
+      <%= image_tag "inchikigram_icon.png", class: "inchikigram_icon" %>
+    <% end %>
+  </li>
+  <li>
+    <%=link_to posts_path, class: "nav-link" do %>
+      <i class="fas fa-home"></i> ホーム
+    <% end %>
+  </li>
+  <li>
+    <%= link_to user_path(current_user), class: "nav-link" do %>
+      <i class="fas fa-user"></i> プロフィール
+    <% end %>
+  </li>
+  <li>
+    <%=link_to users_path, class: "nav-link" do %>
+      <i class="fas fa-users"></i> User一覧
+    <% end %>
+  </li>
+  <li>
+    <%= link_to destroy_user_session_path, class: "nav-link", :method=>:delete, data: {confirm: "本当にログアウトしてもよろしいですか？"} do %>
+      <i class="fas fa-sign-out-alt"></i> ログアウト
+    <% end %>
+  </li>
+  <li>
+    <button type="button" class="btn-lg btn-primary rounded-pill post-botton" data-toggle="modal" data-target="#postModal">
+      <span>投稿する</span>
+　　 </button>
+  </li>
+</ul>

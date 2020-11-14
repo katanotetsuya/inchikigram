@@ -1,2 +1,42 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<!-- container-fluid → 可変幅のコンテナ(ウィンドウサイズを変えても常に画面いっぱいに広がる -->
+<div class='container-fluid'>
+  <div class='row'>
+
+　　<!-- サブメニュー -->
+  	<div class='col-3'>
+      <%= render 'posts/sidemenu' %>
+  	</div>
+　  <!-- 投稿ボタン -->
+    <%= render 'posts/modal', posts:Post.new %>
+
+    <div class='col-6 user-show-main'>
+      <div class="card">
+        <div class="card-header">
+    	    <%= attachment_image_tag @user, :profile_image, :fill, 50, 50, fallback: "no-image.jpg", size: "50x50", class: "rounded-circle" %>
+    	    <%= @user.name %>
+          <% if @user == current_user %>
+    	      <%= link_to edit_user_path(@user), class: "user-edit-icon" do %>
+              <i class="fa fa-gear fa-lg "></i>
+            <% end %>
+          <% end %>
+        </div>
+    	  <% @posts.each do |post| %>
+    	  	<%= attachment_image_tag post, :image %>
+    	  	<div class="card-body">
+            <% if @user == current_user %>
+      	  	  <%= link_to post_path(post), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "post-delete-icon destroy_post_#{post.id}" do %>
+                <i class="fa fa-trash-o fa-lg  "></i>
+              <% end %>
+              <%= link_to edit_post_path(post.id), class: "post-edit-icon" do %>
+                <i class="fa fa-wrench fa-lg  "></i>
+              <% end %>
+            <% end %>
+    	  	  <div class="card-text">
+    	  	  	<%= post.post_comment %>
+    	  	  </div>
+    	  	</div>
+    	  <% end %>
+      </div>
+
+  </div>
+</div>

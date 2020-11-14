@@ -1,0 +1,55 @@
+<!-- container-fluid → 可変幅のコンテナ(ウィンドウサイズを変えても常に画面いっぱいに広がる -->
+<div class='container-fluid'>
+  <div class='row'>
+
+　　<!-- サブメニュー -->
+  	<div class='col-3'>
+      <%= render 'posts/sidemenu' %>
+  	</div>
+　  <!-- 投稿ボタン -->
+    <%= render 'posts/modal', post:Post.new %>
+
+　　<!-- メイン画面 -->
+  	<div class='col-6'>
+      <div class="card chat">
+        <div class="card-header">
+          <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no-image.jpg", size: "50x50", class: "rounded-circle" %>
+          <%= @user.name %>
+        </div>
+
+        <div class="card-body">
+
+            <% @chats.each do |chat| %>
+
+              <% if chat.user.id == current_user.id %>
+                <div class="row">
+                  <div class="col-2 ml-auto p-1">
+                    <p class="my-message"><%= chat.message %></p>
+                  </div>
+                </div>
+              <% else %>
+                <div class="row">
+                  <div class="col-1">
+                    <%= attachment_image_tag chat.user, :profile_image, :fill, 40, 40, fallback: "no-image.jpg", size: "40x40", class: "rounded-circle" %>
+                  </div>
+                  <div class="col-2 p-1">
+                    <p class="other-message"><%= chat.message %></p>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+
+        </div>
+
+        <div class="card-footer">
+          <%= form_with model: @chat do |f| %>
+            <%= f.text_field :message %>
+            <%= f.hidden_field :room_id %>
+            <%= f.submit %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
