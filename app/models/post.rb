@@ -6,4 +6,5 @@ class Post < ApplicationRecord
   has_many :liking_users, through: :likes, source: :user
   #refile
   attachment :image
+  has_many :tags, dependent: :destroy
 end

@@ -15,11 +15,15 @@ class PostsController < ApplicationController
 	def create
 			@post = Post.new(post_params)
 			@post.user_id = current_user.id
-			if @post.save
-				redirect_to posts_path, notice: "You have created book successfully."
+			if  @post.save
+			    tags = Vision.get_image_data(@post.image)
+			    tags.each do |tag|
+			      @post.tags.create(name: tag)
+			    end
+				  redirect_to posts_path, notice: "You have created book successfully."
 			else
-				@posts = Post.all
-				redirect_to posts_path
+					@posts = Post.all
+					redirect_to posts_path
 			end
 	end
 
@@ -29,10 +33,14 @@ class PostsController < ApplicationController
 
 	def update
       @post = Post.find(params[:id])
-      if @post.update(post_params)
-         redirect_to user_path(current_user), notice: "You have updated user successfully."
+      if  @post.update(post_params)
+      	  tags = Vision.get_image_data(@post.image)
+			    tags.each do |tag|
+			   	  @post.tags.update(name: tag)
+			    end
+          redirect_to user_path(current_user), notice: "You have updated user successfully."
       else
-         render "show"
+          render "show"
 		  end
 	end
 

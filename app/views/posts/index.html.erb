@@ -22,6 +22,9 @@
 			    <%= attachment_image_tag post, :image %>
 			    <div class="card-body">
 			    	<%= render partial: 'posts/posts', locals: { post: post }  %>
+			    	<% post.tags.each do |tag| %>
+			        <span class="label"><%= tag.name %></span>
+			      <% end %>
 			    </div>
 			    <div class="card-text">
 			    	<%= post.post_comment %>
