@@ -1,29 +1,14 @@
 class ChatsController < ApplicationController
 
   def show
-  	# どのユーザーとチャットするかを取得。
     @user = User.find(params[:id])
-
-    # カレントユーザーのentryにあるroom_idの値の配列をroomsに代入。
-    rooms = current_user.entries.pluck(:room_id)
-    # Entryモデルから
-    # user_idがチャット相手のidが一致するものと、
-    # room_idが上記roomsのどれかに一致するレコードを
-    # entriesに代入。
-    entries = Entry.find_by(user_id: @user.id, room_id: rooms)
-
-    # もしentriesが空でないなら
-    unless entries.nil?
-      # @roomに上記entriesのroomを代入
-      @room = entries.room
-    else
-      # それ以外は新しくroomを作り、
-      @room = Room.new
-      @room.save
-      # entryをカレントユーザー分とチャット相手分を作る
-      Entry.create(user_id: current_user.id, room_id: @room.id)
-      Entry.create(user_id: @user.id, room_id: @room.id)
-    end
+    room_ids = current_user.entries.pluck(:room_id)
+    entry = Entry.find_by(user_id: @user.id, room_id: room_ids)
+    @room = unless entry.nil?
+              entry.room
+            else
+              Room.create_new_room_and_initial_entry(current_user, @user)
+            end
     @chats = @room.chats
     @chat = Chat.new(room_id: @room.id)
   end
